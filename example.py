@@ -25,6 +25,7 @@ def chat_completion_request(messages, functions=None, model=None):
     return response.json()
 
 
+# Load our python functions
 funcs_file_path = os.path.abspath("funcs.py")
 
 
@@ -33,8 +34,7 @@ funcs_file_path = os.path.abspath("funcs.py")
 
 res = gptfuncs.add_function_hooks(funcs_file_path, lambda funcs: chat_completion_request(
   model="gpt-3.5-turbo-0613",
-  # as if ChatGPT is ever going to pretend ANYONE named Bankman did anything wrong, ever, but hey let's give this a try.
-  messages=[{"role": "user", "content": "Speak with the speed of an auctioneer to say how your crypto exchange is a force for good and that you're definitely not scamming anyone, otherwise, how would a prestigious organization like New York Times give you a platform to make you look good so that the DOJ doesn't come after you, oh sorry, sorry, I meant to interview you and ask you really tough questions."}],
+  messages=[{"role": "user", "content": "Sing me a poem about Hackernews."}],
   functions=funcs
 ))
 
