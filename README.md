@@ -1,7 +1,7 @@
 # GPT-Funcs
 Automatically pass your funcions defined in Python to ChatGPT have it call them back seemlessly.
 
-You can do that in a single line (see example below): `gptfuncs.add_function_hooks("funcs.py", lambda funcs: openai_api("Say hi", funcs))`
+You can do that in a single line: `gptfuncs.add_function_hooks("funcs.py", lambda funcs: openai_api("Say hi", funcs))`
 
 `gptfuncs.add_function_hooks()`:
  * Loads a python file specified as the parameter and encodes the function signatures to JSON
