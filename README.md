@@ -1,48 +1,24 @@
 # GPT-Funcs
 Automatically pass your funcions defined in Python to ChatGPT have it call them back seemlessly.
 
-Use PEP-8 style to document your function signatures (see `funcs.py` for an example.)
+You can do that in a single line (see example below): `gptfuncs.add_function_hooks("funcs.py", lambda funcs: openai_api("Say hi", funcs))`
 
-Your completion function should return a json string returned from OpenAI.
+`gptfuncs.add_function_hooks()`:
+ * Loads a python file specified as the parameter and encodes the function signatures to JSON
+ * Calls back the functions dynamically after ChatGPT responds
+
+Use PEP-8 style to document your function signatures (see `funcs.py` for an example.)
 
 ### Example
 
 ```python
-import os
-import requests, json
-import openai
-
-import gptfuncs
-
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-
 def chat_completion_request(messages, functions=None, model=None):
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + OPENAI_API_KEY,
-    }
-    json_data = {"model": model, "messages": messages}
-    if functions is not None:
-        json_data.update({"functions": functions})
+    # post request to OpenAI api
+    # ...
 
-    response = requests.post(
-        "https://api.openai.com/v1/chat/completions",
-        headers=headers,
-        json=json_data,
-    )
-    return response.json()
-
-
-# Load our python functions
-funcs_file_path = os.path.abspath("funcs.py")
-
-
-# ------------------ EXAMPLE 1 ------------------
-# Use OSX "say" command to speak a sentence
-
-res = gptfuncs.add_function_hooks(funcs_file_path, lambda funcs: chat_completion_request(
+# Our functions are defined in funcs.py so we just pass that in to gptfuncs.add_function_hooks
+# and in handles everything
+res = gptfuncs.add_function_hooks("funcs.py", lambda funcs: chat_completion_request(
   model="gpt-3.5-turbo-0613",
   messages=[{"role": "user", "content": "Sing me a poem about Hackernews."}],
   functions=funcs
