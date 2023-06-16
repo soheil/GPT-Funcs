@@ -6,6 +6,7 @@ You can do all that in a single line:
 gptfuncs.add_function_hooks("funcs.py", lambda funcs: openai_api("Say hi", funcs))
 ````
 
+### Under the hood
 `gptfuncs.add_function_hooks()`:
  * Loads a python file specified as the parameter and encodes the function signatures to JSON
  * Calls back the functions dynamically after ChatGPT responds
