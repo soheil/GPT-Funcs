@@ -13,6 +13,12 @@ gptfuncs.add_function_hooks("funcs.py", lambda funcs: openai_api("Say hi", funcs
 
 Use PEP-8 style to document your function signatures (see `funcs.py` for an example.)
 
+### Install
+
+```
+pip install gptfuncs
+```
+
 ### Example
 
 ```python
