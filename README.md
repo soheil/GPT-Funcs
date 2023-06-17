@@ -1,5 +1,5 @@
 # GPT-Funcs
-Automatically pass your funcions defined in Python to ChatGPT have it call them back seemlessly.
+Automatically pass your functions defined in Python to ChatGPT have it call them back seamlessly.
 
 You can do all that in a single line:
 ```python
